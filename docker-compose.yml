@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+
+  mongo:
+    container_name: wedding_gifts_mongodb
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpswd
+    ports:
+      - "27017:27017"
