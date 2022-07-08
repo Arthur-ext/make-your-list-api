@@ -1,5 +1,8 @@
 package main
 
+import "wedding_gifts/api"
+
 func main() {
-	print("wedding gifts")
+	srv := api.NewServer()
+	srv.Start()
 }

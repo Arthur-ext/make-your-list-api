@@ -6,8 +6,6 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
-
-	"wedding_gifts/api/router"
 )
 
 type server struct {
@@ -17,11 +15,11 @@ type server struct {
 func NewServer() server {
 	log.Println("configuring server...")
 
-	api := router.InitRouter()
+	api := newAPI()
 
 	srv := http.Server{
-		Addr: "9000",
-		Handler: api,
+		Addr: ":3000",
+		Handler: api.router,
 	}
 
 	return server{srv}
