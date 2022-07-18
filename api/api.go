@@ -8,17 +8,15 @@ import (
 )
 
 type API struct {
-	application *app.APP
 	router *chi.Mux
 }
 
 func newAPI() *API {
 	application := app.NewAPP()
 
-	router := router.InitRouter()
+	router := router.InitRouter(application)
 
 	return &API{
-		application: application,
 		router: router,
 	}
 }
