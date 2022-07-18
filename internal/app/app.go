@@ -3,22 +3,26 @@ package app
 import (
 	"wedding_gifts/internal/app/controller"
 	"wedding_gifts/internal/database"
+	"wedding_gifts/internal/database/repository"
 )
 
 type APP struct {
-	giftsController controller.Gifts
+	Gifts controller.GiftsController
 }
 
-func NewAPP() *APP {
+func NewAPP() APP {
 	db, err := database.NewMongoClient()
 	if err != nil {
 		panic(err)
 	}
-
-	err = db.CheckConn()
-	if err != nil {
+	if err = db.CheckConn(); err != nil {
 		panic(err)
 	}
 
-	return &APP{}
+	giftRepo := repository.NewGiftsRepository(db.Client)
+	giftController := controller.NewGifts(giftRepo)
+	
+	return APP{
+		Gifts: giftController,
+	}
 }
