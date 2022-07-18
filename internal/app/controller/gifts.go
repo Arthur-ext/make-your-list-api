@@ -66,7 +66,13 @@ func (c *GiftsController) UpdateAssigner(data map[string]string) error {
 	if !ok {
 		return errors.New("not have a key assigned")
 	}
-	payload := bson.D{{Key: "$set", Value: bson.M{"assigned": assigned}}}
+	payload := bson.D{{
+		Key: "$set",
+		Value: bson.M{
+			"assigned": assigned,
+			"updatedAt": time.Now(),
+		},
+	}}
 
 	if err := c.repo.Update(filter, payload); err != nil {
 		return err
