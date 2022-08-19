@@ -2,6 +2,21 @@ version: "3"
 
 services:
 
+  app:
+    container_name: wedding_gifts_application
+    build:
+      context: ./build/package/.
+      target: dev
+    # environment:
+    #   DEBUG: "true"
+    #   PORT: "3000"
+    volumes:
+      - .:/opt/app:rw
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+
   mongo:
     container_name: wedding_gifts_mongodb
     image: mongo
