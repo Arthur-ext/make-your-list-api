@@ -14,7 +14,7 @@ type MongoClient struct {
 }
 
 func NewMongoClient() (*MongoClient, error) {
-	uri := "mongodb://root:rootpswd@localhost:27017"
+	uri := "mongodb://root:rootpswd@mongo:27017"
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
