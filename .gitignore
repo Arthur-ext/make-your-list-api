@@ -1,3 +1,6 @@
 build/config/tmp
 observations
 tmp
+bin
+.env
+.vscode
