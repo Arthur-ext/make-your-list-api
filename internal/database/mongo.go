@@ -19,9 +19,11 @@ type MongoClient struct {
 }
 
 func NewMongoClient() (*MongoClient, error) {
-	err := godotenv.Load(".env")
-	if err != nil {
-		log.Fatalf("some error occured. Err: %s", err)
+	if os.Getenv("APPENV") == "" {
+		err := godotenv.Load(".env")
+		if err != nil {
+			log.Fatalf("some error occured. Err: %s", err)
+		}
 	}
 	mongo_pass := os.Getenv("MONGO_PSWD")
 
