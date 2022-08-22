@@ -5,23 +5,20 @@ services:
   app:
     container_name: wedding_gifts_application
     build:
-      context: ./build/package/.
-      target: dev
-    # environment:
-    #   DEBUG: "true"
-    #   PORT: "3000"
+      context: build/package/.
+      target: ${APPENV-dev}
     volumes:
       - .:/opt/app:rw
     ports:
-      - "3000:3000"
+      - "80:3000"
     depends_on:
       - mongo
 
-  mongo:
-    container_name: wedding_gifts_mongodb
-    image: mongo
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: rootpswd
-    ports:
-      - "27017:27017"
+  # mongo:
+  #   container_name: wedding_gifts_mongodb
+  #   image: mongo
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: root
+  #     MONGO_INITDB_ROOT_PASSWORD: rootpswd
+  #   ports:
+  #     - "27017:27017"
