@@ -15,16 +15,15 @@ type server struct {
 }
 
 func NewServer() server {
-	if os.Getenv("APPENV") == "" {
+	port := os.Getenv("PORT")
+	if port == "" {
 		err := godotenv.Load(".env")
 		if err != nil {
 			log.Fatalf("some error occured. Err: %s", err)
 		}
-	}
-	port := os.Getenv("PORT")
-	if port != "" {
 		port = os.Getenv("LOCAL_PORT")
 	}
+	
 
 	print("$PORT: " + port)
 
