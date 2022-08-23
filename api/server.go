@@ -26,6 +26,8 @@ func NewServer() server {
 		port = os.Getenv("LOCAL_PORT")
 	}
 
+	print("$PORT: " + port)
+
 	log.Println("configuring server...")
 
 	api := newAPI()
