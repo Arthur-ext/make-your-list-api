@@ -6,6 +6,8 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+
+	"github.com/joho/godotenv"
 )
 
 type server struct {
@@ -13,12 +15,23 @@ type server struct {
 }
 
 func NewServer() server {
+	if os.Getenv("APPENV") == "" {
+		err := godotenv.Load(".env")
+		if err != nil {
+			log.Fatalf("some error occured. Err: %s", err)
+		}
+	}
+	port := os.Getenv("PORT")
+	if port != "" {
+		port = os.Getenv("LOCAL_PORT")
+	}
+
 	log.Println("configuring server...")
 
 	api := newAPI()
 
 	srv := http.Server{
-		Addr: ":3000",
+		Addr: port,
 		Handler: api.router,
 	}
 
