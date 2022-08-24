@@ -19,13 +19,14 @@ type MongoClient struct {
 }
 
 func NewMongoClient() (*MongoClient, error) {
-	if os.Getenv("APPENV") == "" {
-		err := godotenv.Load(".env")
-		if err != nil {
-			log.Fatalf("some error occured. Err: %s", err)
-		}
+	var mongo_pass string
+	
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Println("Prod env")
 	}
-	mongo_pass := os.Getenv("MONGO_PSWD")
+	mongo_pass = os.Getenv("MONGO_PSWD")
+	
 
 	uri := fmt.Sprintf("mongodb+srv://wedding-gifts:%s@cluster0.fle2wmc.mongodb.net/?retryWrites=true&w=majority", mongo_pass)
 	

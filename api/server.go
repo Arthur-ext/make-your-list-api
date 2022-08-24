@@ -15,17 +15,16 @@ type server struct {
 }
 
 func NewServer() server {
-	port := os.Getenv("PORT")
-	if port == "" {
-		err := godotenv.Load(".env")
-		if err != nil {
-			log.Fatalf("some error occured. Err: %s", err)
-		}
+	var port string
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Println("Prod env")
 		port = os.Getenv("LOCAL_PORT")
+	} else {
+		port = os.Getenv("PORT")
 	}
 	
-
-	print("$PORT: " + port)
+	// log.Println("$PORT: " + port)
 
 	log.Println("configuring server...")
 
