@@ -1,1 +1,1 @@
-web: /cmd/wedding_gifts/bin/wedding_gifts
+web: cmd/wedding_gifts/bin/wedding_gifts
