@@ -1,10 +1,10 @@
-FROM bitnami/golang AS dev
-WORKDIR /opt/app
+# FROM bitnami/golang AS dev
+# WORKDIR /opt/app
 
-COPY . .
+# COPY . .
 
-RUN go install github.com/cosmtrek/air@latest
-ENTRYPOINT ["air", "-c", "./build/config/.air.toml"]
+# RUN go install github.com/cosmtrek/air@latest
+# ENTRYPOINT ["air", "-c", "./build/config/.air.toml"]
 
 FROM heroku/heroku:20-build as build
 
