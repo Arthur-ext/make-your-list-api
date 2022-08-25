@@ -4,6 +4,8 @@ services:
 
   app:
     container_name: wedding_gifts_application
+    env_file:
+      - .env
     build:
       context: build/package/.
       target: ${APPENV-dev}
@@ -11,8 +13,11 @@ services:
       - .:/opt/app:rw
     ports:
       - "3000:3000"
-    depends_on:
-      - mongo
+    # environment:
+    #   - LOCAL_PORT=${LOCAL_PORT}
+    #   - MONGO_PSWD=${MONGO_PSWD}
+    # depends_on:
+    #   - mongo
 
   # mongo:
   #   container_name: wedding_gifts_mongodb
