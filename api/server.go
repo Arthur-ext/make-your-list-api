@@ -6,8 +6,6 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
-
-	"github.com/joho/godotenv"
 )
 
 type server struct {
@@ -16,19 +14,16 @@ type server struct {
 
 func NewServer() server {
 	var port string
-	err := godotenv.Load(".env")
-	if err != nil {
-		log.Println("Prod env")
-		port = os.Getenv("LOCAL_PORT")
-	} else {
+
+	if os.Getenv("APPENV") == "prod" {
 		port = os.Getenv("PORT")
+	} else {
+		port = os.Getenv("LOCAL_PORT")
 	}
 
 	if port == "" {
 		log.Fatal("$PORT must be set")
 	}
-	
-	// log.Println("$PORT: " + port)
 
 	log.Println("configuring server...")
 

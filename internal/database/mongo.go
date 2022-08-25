@@ -3,15 +3,12 @@ package database
 import (
 	"context"
 	"fmt"
-	"log"
 	"os"
 	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
-
-	"github.com/joho/godotenv"
 )
 
 type MongoClient struct {
@@ -19,14 +16,7 @@ type MongoClient struct {
 }
 
 func NewMongoClient() (*MongoClient, error) {
-	var mongo_pass string
-	
-	err := godotenv.Load(".env")
-	if err != nil {
-		log.Println("Prod env")
-	}
-	mongo_pass = os.Getenv("MONGO_PSWD")
-	
+	mongo_pass := os.Getenv("MONGO_PSWD")
 
 	uri := fmt.Sprintf("mongodb+srv://wedding-gifts:%s@cluster0.fle2wmc.mongodb.net/?retryWrites=true&w=majority", mongo_pass)
 	
