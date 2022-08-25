@@ -30,7 +30,7 @@ func NewServer() server {
 	api := newAPI()
 
 	srv := http.Server{
-		Addr: port,
+		Addr: ":"+port,
 		Handler: api.router,
 	}
 
