@@ -23,6 +23,10 @@ func NewServer() server {
 	} else {
 		port = os.Getenv("PORT")
 	}
+
+	if port == "" {
+		log.Fatal("$PORT must be set")
+	}
 	
 	// log.Println("$PORT: " + port)
 
